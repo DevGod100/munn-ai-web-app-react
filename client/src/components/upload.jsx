@@ -14,28 +14,29 @@ function MetadataUploadForm() {
     e.preventDefault();
 
     if (!file) {
-      alert('Please select a metadata.json file.');
+      alert('Please select the metadata.jsonl file.');
       return;
     }
-
     const formData = new FormData();
     formData.append('metadata', file);
-
+    
+    console.log('This is after "formData = new FormData" on client side:', file);
     try {
       // Send the formData to your backend endpoint for processing
-      const response = await fetch('/upload', {
+      const response = await fetch('http://localhost:3001/api/upload', {
         method: 'POST',
         body: formData,
       });
+      console.log('This is after API call on client side:', file);
 
       if (response.ok) {
-        alert('Metadata uploaded successfully.');
+        alert('Metadata sent from client.');
       } else {
-        alert('Failed to upload metadata.');
+        alert('Failed to upload metadata from client.');
       }
     } catch (error) {
-      console.error('Error uploading metadata:', error);
-      alert('An error occurred while uploading metadata.');
+      console.error('Error uploading metadata from client:', error);
+      alert('An error occurred while uploading metadata from client.');
     }
   };
 
