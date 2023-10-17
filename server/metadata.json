@@ -1,0 +1,101 @@
+{
+    "enqueue_time": "2023-10-01 14:55:27.302542",
+    "event": {
+        "height": 1024,
+        "textPrompt": [
+            "watching movie, cartoon, disney style, view from back, no background, solid white background"
+        ],
+        "imagePrompts": null,
+        "width": 1024,
+        "seedImageURL": "https://storage.googleapis.com/dream-machines-output/80e8a32d-996f-4e87-b4c9-78f3b5370f34/0_3.png",
+        "eventType": "upscale"
+    },
+    "full_command": "watching movie, cartoon, disney style, view from back, no background, solid white background",
+    "id": "32024145-f82d-4315-9522-e6b286b18f7e",
+    "prompt": "watching movie, cartoon, disney style, view from back, no background, solid white background",
+    "user_id": "ef7923a2-585a-4bf0-aa34-d1c304905343",
+    "username": "sailorlab.eu"
+},
+{
+    "_job_type": "diffusion_upsample_v5_virtual",
+    "_parsed_params": {
+        "creative": false,
+        "fast": false,
+        "hd": false,
+        "niji": false,
+        "no": [],
+        "public": false,
+        "relax": false,
+        "stealth": false,
+        "style": "",
+        "test": false,
+        "testp": false,
+        "tile": false,
+        "turbo": false,
+        "upanime": false,
+        "upbeta": false,
+        "uplight": false,
+        "version": "5.2",
+        "vibe": false,
+        "video": false
+    },
+    "_service": "main",
+    "avatar_job_id": null,
+    "avatar_job_index": null,
+    "cover_job_id": null,
+    "cover_job_index": null,
+    "current_status": "completed",
+    "enqueue_time": "2023-10-01 08:45:52.948655",
+    "event": {
+        "height": 1024,
+        "textPrompt": [
+            "little fairy character, full body, disney style, –no shadows, solid pink background"
+        ],
+        "imagePrompts": null,
+        "width": 1024,
+        "batchSize": 1,
+        "seedImageURL": "https://storage.googleapis.com/dream-machines-output/da115c4d-bc79-40b7-9bd3-da19ef2745db/0_1.png",
+        "textPromptWeights": [
+            1
+        ],
+        "eventType": "upscale",
+        "test": false
+    },
+    "flagged": false,
+    "full_command": "little fairy character, full body, disney style, –no shadows, solid pink background",
+    "grid_cells": 0,
+    "grid_id": null,
+    "grid_num": null,
+    "guild_id": "662267976984297473",
+    "hidden": false,
+    "id": "469dbf10-579c-425a-b65c-bc3485608644",
+    "image_paths": [
+        "https://storage.googleapis.com/dream-machines-output/da115c4d-bc79-40b7-9bd3-da19ef2745db/0_1.png"
+    ],
+    "is_published": true,
+    "liked_by_user": false,
+    "liked_timestamp": null,
+    "low_priority": null,
+    "metered": null,
+    "mod_hidden": false,
+    "parent_grid": 1,
+    "parent_id": "da115c4d-bc79-40b7-9bd3-da19ef2745db",
+    "parsed_command": null,
+    "platform": "discord",
+    "platform_channel": "Untracked",
+    "platform_channel_id": "995431514080813086",
+    "platform_message_id": "1157961587773157487",
+    "platform_thread_id": null,
+    "prompt": "little fairy character, full body, disney style, –no shadows, solid pink background",
+    "ranked_by_user": false,
+    "ranked_timestamp": null,
+    "ranking_by_user": null,
+    "reference_image_num": "1",
+    "reference_job_id": "da115c4d-bc79-40b7-9bd3-da19ef2745db",
+    "soft_ban": false,
+    "tag": null,
+    "trial": false,
+    "type": "v5_upscale",
+    "user_id": "ef7923a2-585a-4bf0-aa34-d1c304905343",
+    "username": "sailorlab.eu"
+}

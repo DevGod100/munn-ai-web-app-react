@@ -21,10 +21,9 @@ const gc = new Storage({
   projectId: "munn-ai" 
 });
 
-gc.getBuckets().then(x => console.log(x))
+// gc.getBuckets().then(x => console.log(x))
 
 const bucketName = gc.bucket('bucket-quickstart_munn-ai'); // Replace with your GCS bucket name
-// i want it to end up here: https://storage.googleapis.com/bucket-quickstart_munn-ai/uploaded-by-users/...
 
 // Route for handling file upload
 app.post('/api/upload', uploadMiddleware.single('metadata'), async (req, res) => {

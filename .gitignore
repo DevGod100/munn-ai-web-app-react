@@ -3,3 +3,5 @@ server-new-filecreated
 
 
 /server/node_modules
+/server/.env
+/server/not in use
