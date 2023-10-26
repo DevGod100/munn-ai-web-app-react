@@ -1,9 +1,9 @@
 const fs = require('fs');
-const path = require('path');
-const { Storage } = require('@google-cloud/storage');
 
 const filename = 'steve.jsonl';
 
+
+// transform jsonl => JSON
 const parseJSONLFile = () => {
   const data = fs.readFileSync(filename, 'utf-8');
   const lines = data.split('\n');
@@ -22,16 +22,18 @@ const parseJSONLFile = () => {
 
 const data = parseJSONLFile();
 
-// Define the fields you want to retain
+// Define the fields to retain
 const fieldsToRetain = [
   'enqueue_time',
   'event.height',
+  'event.width',
   'event.textPrompt',
-  'event.seedImageURL',
+  // 'event.seedImageURL',
+  "image_paths",  // array of the 4 images generated
   'event.eventType',
   'full_command',
   'id',
-  'prompt',
+  // 'prompt', // unneccessary duplicate
   'user_id',
   'username',
 ];
