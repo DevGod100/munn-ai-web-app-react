@@ -28,10 +28,12 @@ function MetadataUploadForm() {
         body: formData,
       });
       console.log('This is after API call on client side:', file);
+      
 
       if (response.ok) {
         alert('Metadata sent from client.');
       } else {
+        console.log(response);
         alert('Failed to upload metadata from client.');
       }
     } catch (error) {

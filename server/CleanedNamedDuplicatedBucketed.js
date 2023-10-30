@@ -1,7 +1,4 @@
 const fs = require('fs');
-const path = require('path');
-const { Storage } = require('@google-cloud/storage');
-
 
 const filename = 'steve.jsonl';
 
@@ -23,75 +20,21 @@ const parseJSONLFile = () => {
 
 const data = parseJSONLFile();
 
-const gc = new Storage({
-  keyFilename: path.join(__dirname, './munn-ai-1e8d70e12cce.json'),
-  projectId: 'munn-ai',
-});
-
-const bucketName = 'your-own-bucket-name'; // Replace with your GCS bucket name
-
-// Function to upload an image to your GCS bucket
-async function uploadImage(imageURL, objectID) {
-  const bucket = gc.bucket(bucketName);
-  const imageName = `${objectID}.webp`; // Change the file extension if necessary
-
-  try {
-    // Download the image from the original URL (assuming it's publicly accessible)
-    const imageResponse = await fetch(imageURL);
-
-    if (imageResponse.ok) {
-      const imageBuffer = await imageResponse.buffer();
-
-      // Upload the image to your GCS bucket
-      const imageFile = bucket.file(imageName);
-      await imageFile.save(imageBuffer);
-
-      // Generate the public URL for the uploaded image
-      const imagePublicUrl = `https://storage.googleapis.com/${bucketName}/${imageName}`;
-      console.log(`Successfully uploaded image for object ${objectID} to: ${imagePublicUrl}`);
-
-      return imagePublicUrl;
-    } else {
-      console.error(`Failed to download image for object ${objectID}`);
-      return null;
-    }
-  } catch (error) {
-    console.error(`Error uploading image for object ${objectID} to GCS:`, error);
-    return null;
-  }
-}
-
-// Iterate over your cleaned JSON data to upload images and update the seedImageURL
-const cleanedData = data.map((item) => {
-  const imageURL = item['event.seedImageURL'];
-  const objectID = item['id'];
-
-  if (imageURL) {
-    // Upload the image and update the seedImageURL
-    const newImageURL = await uploadImage(imageURL, objectID);
-    if (newImageURL) {
-      item['event.seedImageURL'] = newImageURL;
-    }
-  }
-
-  return item;
-});
-
-// Continue with your code to save the updated JSON data and upload it to GCS
 const fieldsToRetain = [
   'enqueue_time',
   'event.height',
+  'event.width',
   'event.textPrompt',
-  'event.seedImageURL',
+  "image_paths",
   'event.eventType',
   'full_command',
   'id',
-  'prompt',
   'user_id',
   'username',
 ];
 
-const cleanedDataJSON = cleanedData.map((item) => {
+// Process the JSON data to extract the desired fields
+const cleanedData = data.map((item) => {
   const cleanedItem = {};
 
   fieldsToRetain.forEach((field) => {
@@ -115,9 +58,86 @@ const cleanedDataJSON = cleanedData.map((item) => {
   return cleanedItem;
 });
 
-const cleanedJsonData = JSON.stringify(cleanedDataJSON, null, 2);
+// Get the ID from the first item (assuming all items have the same ID)
 const id = cleanedData.length > 0 ? cleanedData[0].id : 'unknown';
-const outputFilename = `${id}.json`;
+// const username = cleanedData.length > 0 ? cleanedData[0].username : 'unknown';
 
-fs.writeFileSync(outputFilename, cleanedJsonData);
-console.log(`Cleaned JSON saved to: ${outputFilename}`);
+// Convert the cleaned data back to JSON
+const cleanedJsonData = JSON.stringify(cleanedData, null, 2);
+
+// Save the cleaned data to a new file (e.g., cleanedData.json)
+fs.writeFileSync(`${id}.json`, cleanedJsonData);
+
+console.log(`Cleaned data saved to ${id}.json`);
+
+
+// integrate the google cloud bucket upload
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const gc = new Storage({
+//   keyFilename: path.join(__dirname, './munn-ai-1e8d70e12cce.json'),
+//   projectId: 'munn-ai',
+// });
+
+// const bucketName = 'bucket-quickstart_munn-ai'; // Replace with your GCS bucket name
+
+// // Function to upload an image to your GCS bucket
+// async function uploadImage(imageURL, objectID) {
+//   const bucket = gc.bucket(bucketName);
+//   const imageName = `${objectID}.webp`; // Change the file extension if necessary
+
+//   try {
+//     // Download the image from the original URL (assuming it's publicly accessible)
+//     const imageResponse = await fetch(imageURL);
+
+//     if (imageResponse.ok) {
+//       const imageBuffer = await imageResponse.buffer();
+
+//       // Upload the image to your GCS bucket
+//       const imageFile = bucket.file(imageName);
+//       await imageFile.save(imageBuffer);
+
+//       // Generate the public URL for the uploaded image
+//       const imagePublicUrl = `https://storage.googleapis.com/${bucketName}/${imageName}`;
+//       console.log(`Successfully uploaded image for object ${objectID} to: ${imagePublicUrl}`);
+
+//       return imagePublicUrl;
+//     } else {
+//       console.error(`Failed to download image for object ${objectID}`);
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error(`Error uploading image for object ${objectID} to GCS:`, error);
+//     return null;
+//   }
+// }
+
+// // Iterate over your cleaned JSON data to upload images and update the seedImageURL
+// const cleanedData = data.map((item) => {
+//   const imageURL = item['event.seedImageURL'];
+//   const objectID = item['id'];
+
+//   if (imageURL) {
+//     // Upload the image and update the seedImageURL
+//     const newImageURL = await uploadImage(imageURL, objectID);
+//     if (newImageURL) {
+//       item['event.seedImageURL'] = newImageURL;
+//     }
+//   }
+
+//   return item;
+// });

@@ -2,6 +2,8 @@ const fs = require('fs');
 
 const filename = 'steve.jsonl';
 
+// node vitalFieldsPlusGiveIdAsName.js
+
 
 // transform jsonl => JSON
 const parseJSONLFile = () => {
@@ -65,6 +67,7 @@ const cleanedData = data.map((item) => {
 
 // Get the ID from the first item (assuming all items have the same ID)
 const id = cleanedData.length > 0 ? cleanedData[0].id : 'unknown';
+// const username = cleanedData.length > 0 ? cleanedData[0].username : 'unknown';
 
 // Convert the cleaned data back to JSON
 const cleanedJsonData = JSON.stringify(cleanedData, null, 2);
